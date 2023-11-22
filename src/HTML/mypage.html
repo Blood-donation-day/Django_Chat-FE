@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/src/js/navbar.js" async></script>
+    <script src="/src/js/main.js" async></script>
     <title></title>
 </head>
 
@@ -16,7 +18,7 @@
 
                 <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="flex flex-shrink-0 items-center">
-                        <a href="front2.html"><img class="h-8 w-auto" src="이미지 경로" alt="Main" /></a>
+                        <a href="mypage.html"><img class="h-8 w-auto" src="/src/img/Logo.png" alt="Main" /></a>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -41,15 +43,16 @@
                                 class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                 id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                 <span class="absolute -inset-1.5"></span>
-                                <img class="h-[4rem] w-[4rem] rounded-full" src="이미지 경로" alt="profile" />
+                                <img class="nav-profile-image h-[4rem] w-[4rem] rounded-full"
+                                    src="/src/img/profile-default.jpg" alt="profile" />
                             </button>
                         </div>
                         <div class="picture hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                id="user-menu-item-0">내 프로필</a>
-                            <a href="#" class="logout block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-2">로그아웃</a>
+                            role="menu" aria-orientation="vertical" tabindex="-1">
+                            <a href="#" class="hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1" id="user-menu-item-0">내 프로필</a>
+                            <a href="#" class="hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1" id="user-menu-item-2">로그인</a>
                         </div>
                     </div>
                 </div>
@@ -62,17 +65,18 @@
 
     <!-- component -->
     <div class="bg-gray-100 flex items-center justify-center py-28">
-        <div class="sm:block hidden px-10">프로필자리
-            <div class="flex min-h-full flex-col justify-center px-6 py-2 lg:px-8">
-                <div class="flex flex-col mx-auto w-full max-w-lg">
-                    <p class="pt-10">
-                        <img class="h-40 w-40 m-auto rounded-full" src="#" width="200px" alt="profile_img" />
+        <div class="sm:block hidden px-5 w-96">
+            <div class="flex flex-col items-start bg-gray-500 rounded-md lg:px-2">
+                <div class="flex flex-col w-full px-4">
+                    <p class="pt-5">
+                        <img class="profile_image h-24 w-24 m-auto rounded-full" src="/src/img/profile-default.jpg"
+                            width="150px" alt="profile_img" />
                     </p>
-                    <div class="flex flex-row justify-between">
-                        <div class="blank text-gray-300"></div>
-                        <div class="nickname">
+                    <div class="flex flex-col flex-wrap justify-between">
+
+                        <div class="nick">
                             <h2
-                                class="mt-2 pl-[90px] text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">
+                                class="mt-2 username text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">
                                 닉네임
                             </h2>
                         </div>
@@ -84,15 +88,15 @@
                     </div>
                     <textarea
                         class="bg-gray-400 rounded m-auto mt-4 pt-2 pb-2 text-lg pl-2 font-medium w-full resize-none scrollbar-hide"
-                        name="introduce" maxlength="200" id="id_introduce" rows="3" readonly
-                        placeholder="자기소개를 해주세요."></textarea>
-                    <div class="profile_detail pt-8 pl-4">
-                        <p class="pt-4 text-lg font-medium">
+                        name="introduce" maxlength="200" id="id_introduce" rows="2" readonly
+                        placeholder="자기소개를 해주세요.">자기소개를 해주세요</textarea>
+                    <div class="profile_detail pt-3 pl-4">
+                        <p class="pt-1 text-lg font-medium">
                             사용자 이름: 이름
                         </p>
                         <p class="pt-2 text-lg font-medium">이메일: 이메일</p>
-                        <p class="pt-2 text-lg font-medium">
-                            최근 로그인:{{ profile_user.last_login|date:"Y/m/d H:i" }}
+                        <p class="pt-2 text-lg font-medium pb-4">
+                            남은 횟수: 5
                         </p>
                     </div>
                 </div>
