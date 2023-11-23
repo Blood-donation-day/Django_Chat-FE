@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/src/js/urls.js"></script>
+    <script src="/src/js/common.js"></script>
     <script src="/src/js/navbar.js" async></script>
     <script src="/src/js/main.js" async></script>
     <title>마이 페이지</title>
@@ -24,19 +25,12 @@
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <div class='max-w-md mx-auto sm:block hidden'>
-                        <div
-                            class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-                            <div class="searchbutton grid place-items-center h-full w-12 text-gray-300">
-
-                            </div>
-                            <form action="" method="GET">
-                                <input class="peer h-full w-full outline-none text-sm text-gray-700 pr-2" type="text"
-                                    id="search" name="q" placeholder="검색" />
-                                <input class="hidden search" type="submit" value="검색" />
-                            </form>
-                        </div>
-                    </div>
+                    <a href="" class="mainpage">
+                        <span class="text-2xl font-bold cursor-pointer ">MainPage</span>
+                    </a>
+                    <a href="" class="mypage">
+                        <span class="text-2xl font-bold ml-6 cursor-pointer ">MyPage</span>
+                    </a>
                     <a href=''
                         class="login mr-12 sm:ml-6 bg-blue-800 text-gray-300 hover:bg-blue-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium">로그인</a>
 
@@ -53,12 +47,15 @@
                 </div>
                 <div class="picture hidden absolute right-0 z-10 mt-40 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" aria-orientation="vertical" tabindex="-1">
-                    <a href="/src/HTML/profile.html"
-                        class="hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                        tabindex="-1" id="user-menu-item-0">내 프로필</a>
-                    <a href="/src/HTML/login.html"
-                        class="hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                        tabindex="-1" id="user-menu-item-2">로그인</a>
+                    <a href=""
+                        class="modal_profile hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem" tabindex="-1" id="user-menu-item-0">내 프로필</a>
+                    <a href=""
+                        class="modal_login hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem" tabindex="-1" id="user-menu-item-1">로그인</a>
+                    <a href=""
+                        class="modal_logout hidden hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem" tabindex="-1" id="user-menu-item-2">로그아웃</a>
                 </div>
             </div>
         </div>
@@ -110,7 +107,7 @@
 
         <div class="w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 bg-white p-6 rounded-lg shadow-sm">
             <div class="w-full flex justify-between items-center p-3">
-                <h2 class="text-xl font-semibold">My Project</h2>
+                <h2 class="text-3xl font-semibold">내 기록</h2>
                 <button id="openModalBtn"
                     class="flex items-center bg-black  border border-black text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300">
                     <svg class="w-4 h-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -118,14 +115,14 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
-                    <p class="text-white">New Project</p>
+                    <p class="text-white">새로운 추천받기</p>
                 </button>
             </div>
             <div class="w-full flex justify-center p-1 mb-4">
                 <div class="relative w-full">
-                    <input type="text"
+                    <input type="search"
                         class="w-full  bg-white py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-black transition-colors duration-300"
-                        placeholder="Search...">
+                        name='q' placeholder="기록에서 검색...">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -135,7 +132,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 <!-- Card 1 -->
                 <div
                     class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">

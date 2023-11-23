@@ -1,3 +1,6 @@
+const $loginlogo = document.querySelector(".login_logo");
+$loginlogo.href = mainpage;
+
 async function login() {
   ClearLocal();
   const email = document.getElementById("email").value;

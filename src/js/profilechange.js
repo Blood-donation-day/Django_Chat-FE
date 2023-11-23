@@ -18,7 +18,7 @@ const $lastupdate = document.querySelector(".lastupdate");
 const $submitbutton = document.querySelector(".submit");
 
 $email.innerHTML = "이메일: " + user.email;
-$lastupdate.innerHTML = "최근 로그인: " + datetime;
+$lastupdate.innerHTML = "최근 업데이트: " + datetime;
 // 프로필 데이터를 받고 해당 데이터로 변경
 
 $submitbutton.addEventListener("click", async function () {
@@ -48,6 +48,11 @@ $submitbutton.addEventListener("click", async function () {
         "Localprofiledata",
         JSON.stringify(updatedProfileData.Profile)
       );
+
+      const curuser = JSON.parse(localStorage.getItem("user"));
+      curuser.lastupdate = updatedProfileData.lastupdate;
+      localStorage.setItem("user", JSON.stringify(curuser));
+
       window.alert("프로필이 업데이트되었습니다.");
       window.location.href = mypage;
       //에러

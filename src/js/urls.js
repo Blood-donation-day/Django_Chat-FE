@@ -8,3 +8,4 @@ const page = "http://127.0.0.1:5500";
 const mainpage = page + "/index.html";
 const loginpage = page + "/src/HTML/login.html";
 const mypage = page + "/src/HTML/mypage.html";
+const profilepage = page + "/src/HTML/profile.html";

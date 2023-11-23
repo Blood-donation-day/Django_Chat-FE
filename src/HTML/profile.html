@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/src/js/urls.js"></script>
     <script src="/src/js/navbar.js" async></script>
-    <script src="/src/js/main.js" async></script>
+    <script src="/src/js/common.js"></script>
     <script src="/src/js/profilechange.js" async></script>
 
     <title>프로필 변경</title>
@@ -38,19 +38,12 @@
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <div class='max-w-md mx-auto sm:block hidden'>
-                        <div
-                            class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-                            <div class="searchbutton grid place-items-center h-full w-12 text-gray-300">
-
-                            </div>
-                            <form action="" method="GET">
-                                <input class="peer h-full w-full outline-none text-sm text-gray-700 pr-2" type="text"
-                                    id="search" name="q" placeholder="검색" />
-                                <input class="hidden search" type="submit" value="검색" />
-                            </form>
-                        </div>
-                    </div>
+                    <a href="" class="mainpage">
+                        <span class="text-2xl font-bold cursor-pointer ">MainPage</span>
+                    </a>
+                    <a href="" class="mypage">
+                        <span class="text-2xl font-bold ml-6 cursor-pointer ">MyPage</span>
+                    </a>
                     <a href=''
                         class="login mr-12 sm:ml-6 bg-blue-800 text-gray-300 hover:bg-blue-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium">로그인</a>
 
@@ -67,12 +60,15 @@
                 </div>
                 <div class="picture hidden absolute right-0 z-10 mt-40 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" aria-orientation="vertical" tabindex="-1">
-                    <a href="/src/HTML/profile.html"
-                        class="hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                        tabindex="-1" id="user-menu-item-0">내 프로필</a>
-                    <a href="/src/HTML/login.html"
-                        class="hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                        tabindex="-1" id="user-menu-item-2">로그인</a>
+                    <a href=""
+                        class="modal_profile hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem" tabindex="-1" id="user-menu-item-0">내 프로필</a>
+                    <a href=""
+                        class="modal_login hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem" tabindex="-1" id="user-menu-item-1">로그인</a>
+                    <a href=""
+                        class="modal_logout hidden hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
+                        role="menuitem" tabindex="-1" id="user-menu-item-2">로그아웃</a>
                 </div>
             </div>
         </div>

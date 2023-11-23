@@ -1,3 +1,6 @@
+const $signuplogo = document.querySelector(".signup_logo");
+$signuplogo.href = mainpage;
+
 const signup = async (e) => {
   e.preventDefault();
 
