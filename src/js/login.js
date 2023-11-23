@@ -1,12 +1,10 @@
-const mypage = "http://127.0.0.1:5500/src/HTML/mypage.html";
-
 async function login() {
   ClearLocal();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/accounts/login/", {
+    const response = await fetch(loginurl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
