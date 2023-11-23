@@ -3,8 +3,9 @@ const url = "http://127.0.0.1:8000";
 const profileurl = url + "/accounts/profile/";
 const loginurl = url + "/accounts/login/";
 const signupurl = url + "/accounts/signup/";
-const loginpage = "http://127.0.0.1:5500/src/HTML/login.html";
-const mypage = "http://127.0.0.1:5500/src/HTML/mypage.html";
+const page = "http://127.0.0.1:5500";
+const loginpage = page + "/src/HTML/login.html";
+const mypage = page + "/src/HTML/mypage.html";
 
 //프로필 정보
 const username = document.querySelector(".username");
@@ -70,7 +71,7 @@ async function RefreshAccessToken() {
     if (response.ok) {
       const refreshData = await response.json();
       console.log("토큰 재발급 완료", refreshData);
-
+      await RefreshData();
       await GetProfile();
 
       //기타 에러 처리
@@ -83,6 +84,25 @@ async function RefreshAccessToken() {
     }
   } catch (error) {
     console.error("토큰 갱신 에러", error);
+  }
+}
+
+async function RefreshData() {
+  const response = await fetch(profileurl, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookie("access"),
+    },
+    credentials: "include",
+  });
+
+  if (response.ok) {
+    const serverProfile = await response.json();
+    console.log("프로필: ", serverProfile);
+    Updateprofile(serverProfile);
+
+    localStorage.setItem("Localprofiledata", JSON.stringify(serverProfile));
   }
 }
 
@@ -119,6 +139,14 @@ function Updateprofile(profiledata) {
     "남은 횟수: " + JSON.parse(localStorage.getItem("user")).today_limit;
 }
 
-// 로그인이 필요한 모든 요청에서 프로필 정보를 가져오면서 토큰여부 확인.
-
 GetProfile();
+
+function ClearLocal() {
+  localStorage.clear();
+  function deleteCookie(cookieName) {
+    document.cookie =
+      cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+  deleteCookie("refresh");
+  deleteCookie("access");
+}

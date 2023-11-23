@@ -51,6 +51,8 @@ $submitbutton.addEventListener("click", async function () {
       window.alert("프로필이 업데이트되었습니다.");
       window.location.href = mypage;
       //에러
+    } else if (response.status === 401) {
+      await RefreshAccessToken();
     } else {
       const errorData = await response.json();
       console.error("프로필 업데이트 실패:", errorData.message);
