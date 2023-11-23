@@ -5,7 +5,7 @@ async function login() {
   const password = document.getElementById("password").value;
 
   try {
-    const respose = await fetch("http://127.0.0.1:8000/accounts/login/", {
+    const response = await fetch("http://127.0.0.1:8000/accounts/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,7 +14,14 @@ async function login() {
       body: JSON.stringify({ email, password }),
     });
 
-    if (respose.ok) {
+    if (response.ok) {
+      const logindata = await response.json();
+      const user = {
+        email: logindata.user,
+        lastupdate: logindata.lastupdate,
+        today_limit: logindata.today_limit,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       window.location.href = mypage;
     } else {
       //실패 시
