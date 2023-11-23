@@ -1,6 +1,7 @@
 const mypage = "http://127.0.0.1:5500/src/HTML/mypage.html";
 
 async function login() {
+  ClearLocal();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
@@ -16,6 +17,7 @@ async function login() {
 
     if (response.ok) {
       const logindata = await response.json();
+
       const user = {
         email: logindata.user,
         lastupdate: logindata.lastupdate,
@@ -37,3 +39,13 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
   login();
 });
+
+function ClearLocal() {
+  localStorage.clear();
+  function deleteCookie(cookieName) {
+    document.cookie =
+      cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+  deleteCookie("refresh");
+  deleteCookie("access");
+}
