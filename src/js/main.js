@@ -113,7 +113,6 @@ function MainSet() {
     }
     if (profiledata.username && profiledata.username.trim() !== "") {
       username.innerHTML = profiledata.username;
-      username.value = profiledata.username;
     }
     if (profiledata.introduce && profiledata.introduce.trim() !== "") {
       introduce.value = profiledata.introduce;
