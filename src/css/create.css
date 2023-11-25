@@ -1,0 +1,13 @@
+body {
+  /* overflow-x: hidden; */
+}
+
+.options-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 700%;
+}
+
+.options {
+  width: 100%;
+}

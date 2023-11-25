@@ -10,6 +10,8 @@ const $option5 = document.querySelectorAll(".option5");
 const $curoption = document.querySelector(".current_option");
 const $prevoption = document.querySelector(".prev_option");
 const $createbutton = document.querySelector(".create_button");
+const $mypagebutton = document.querySelector(".my_page");
+$mypagebutton.href = mypage;
 
 let promptmessage = {
   난이도: "None",
@@ -51,10 +53,10 @@ function selectRecipe(recipe) {
   promptmessage.레시피 = recipe;
   console.log("promptmessage:", promptmessage);
 }
-function createFood() {}
+
 let slide = 0;
-// 100 / n 으로하면 부동소수점 문제 발생, 페이지 넘어갈 때 잘못된값으로 나옴
-const slidepercent = parseFloat((100 / 7).toFixed(7));
+
+const slidepercent = 100 / 7;
 function slideRight() {
   slide += slidepercent;
   $optionContainer.style.transform = `translateX(-${slide}%)`;
@@ -70,11 +72,12 @@ function slideLeft() {
   $optionContainer.style.transform = `translateX(-${slide}%)`;
   curoption -= 1;
   $curoption.innerHTML = optionstep[curoption];
+  console.log(slide);
 }
 
 function slideRightAll(elements) {
-  elements.forEach((element) => {
-    element.addEventListener("click", slideRight);
+  elements.forEach((e) => {
+    e.addEventListener("click", slideRight);
   });
 }
 slideRightAll($option1);
@@ -91,6 +94,44 @@ $createbutton.addEventListener("click", () => {
     promptmessage.직접입력 = $option6.value;
   }
   console.log("promptmessage:", promptmessage);
-  //createFood();
   slideRight();
+  createFood(promptmessage);
 });
+
+async function createFood(message) {
+  console.log("서버에 요청을 보냈습니다.");
+  try {
+    const response = await fetch(createurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("access"),
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        prompt: message,
+      }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log(result);
+      loadResult(result);
+    } else if (response.status === 401) {
+      await RefreshAccessToken();
+      createFood();
+    } else if (response.status === 403) {
+      alert("오늘 무료 횟수를 모두 소진하셨습니다. 내일 다시 시도해주세요.");
+      location.reload();
+    } else {
+      console.log(response.json);
+    }
+  } catch (error) {
+    console.error("요청 에러", error);
+  }
+}
+
+function loadResult(result) {
+  $foodname = document.querySelector(".foodname");
+  $introduce = document.querySelector(".introduce");
+}
