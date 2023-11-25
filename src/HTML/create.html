@@ -11,6 +11,21 @@
     <script src="/src/js/navbar.js" async></script>
     <title>메뉴 추천받기</title>
 </head>
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    .options-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 700%;
+    }
+
+    .options {
+        width: 100%;
+    }
+</style>
 
 <body>
     <nav class="bg-gray-50 fixed z-10 top-0 left-0 right-0">
@@ -63,192 +78,281 @@
         </div>
     </nav>
 
-
-
     </div>
 
-    <div class="mt-14 mx-auto w-11/12 justify-center bg-white p-6 rounded-lg shadow-sm">
+    <div class="mt-24 mx-auto w-11/12 justify-center bg-white px-6 pt-1 rounded-lg shadow-sm">
         <div class="w-full flex justify-between items-center p-3">
             <h2 class="text-5xl font-semibold">요리 추천</h2>
         </div>
         <p class="p-3 text-lg"> 🍽️ 요리 추천 서비스에 오신 여러분을 환영합니다! 🌟 저는 다양한 요리를 추천해드리고, 원하는 음식에 대한 레시피와 재료 정보를 알려드릴 수 있어요.
             🤖 어떤 종류의 음식을 원하시나요?</p>
-        <p class="options p-3 text-3xl font-bold">요리 난이도</p>
+        <div class=" p-3 text-3xl font-bold">
+            <span class="current_option">요리 난이도</span>
+            <span class="pl-20 text-2xl text-slate-500 cursor-pointer prev_option">뒤로가기</span>
+        </div>
+    </div>
+    <div class="options-container flex flex-nowrap">
 
-
-        <div class="option1 grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="options px-14 grid pt-8 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-3 gap-4">
             <!-- Card 1 -->
-            <div
-                class="bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option1 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectDifficulty('고급')">
                 <h2 class="text-xl font-semibold mb-4">고급</h2>
-                <p class="text-gray-700">고급 난이도에서는 복잡하면서도 정교한 요리를 추천해드립니다. 마스터 셰프를 꿈꾸시거나, 고급 레시피에 도전하고 싶은 분들을 위한 추천이에요.
+                <p class="text-gray-700">고급 난이도에서는 복잡하면서도 정교한 요리를 추천해드립니다. 마스터 셰프를 꿈꾸시거나, 고급 레시피에 도전하고 싶은 분들을 위한
+                    추천이에요.
                     조리 과정에 주의깊게 대해보세요!"
                 </p>
             </div>
-            <div
-                class="bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option1 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectDifficulty('중급')">
+
                 <h2 class="text-xl font-semibold mb-4">중급</h2>
-                <p class="text-gray-700">중급 난이도에서는 다양한 재료와 기술을 활용한 요리를 추천해드립니다. 살짝 도전해보고 싶으시거나, 다양한 요리를 익히고 싶은 분들을 위한
+                <p class="text-gray-700">중급 난이도에서는 다양한 재료와 기술을 활용한 요리를 추천해드립니다. 살짝 도전해보고 싶으시거나, 다양한 요리를 익히고 싶은 분들을
+                    위한
                     추천이에요!</p>
             </div>
-            <div
-                class="bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option1 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectDifficulty('초급')">
                 <h2 class="text-xl font-semibold mb-4">초급</h2>
-                <p class="text-gray-700">초급 난이도에서는 간단하면서도 맛있는 요리를 추천해드립니다. 요리에 익숙하지 않거나, 초보자 분들을 위한 따뜻한 추천이에요. 부담 없이 즐겁게
+                <p class="text-gray-700">초급 난이도에서는 간단하면서도 맛있는 요리를 추천해드립니다. 요리에 익숙하지 않거나, 초보자 분들을 위한 따뜻한 추천이에요. 부담 없이
+                    즐겁게
                     시도해보세요!</p>
             </div>
-            <div
-                class="bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option1 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectDifficulty('None')">
                 <h2 class="text-xl font-semibold mb-4">상관없음</h2>
                 <p class="text-gray-700">어떤 요리든 상관없이, 여러 다양한 맛과 조리 방법을 경험하고 싶다면 '상관없음' 옵션을 선택해보세요! </p>
             </div>
 
         </div>
 
-        <div class="option2 hidden grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+        <div class="options px-14 grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('메인요리')">
                 <h2 class="text-xl font-semibold mb-4">메인요리</h2>
-                <p class="text-gray-700">메인요리에서는 주로 식사의 중심이 되는 다양한 메인 요리들을 추천해드려요. 정성 가득한 주식 혹은 다양한 고기와 채소를 활용한 요리들이 여기에
+                <p class="text-gray-700">메인요리에서는 주로 식사의 중심이 되는 다양한 메인 요리들을 추천해드려요. 정성 가득한 주식 혹은 다양한 고기와 채소를 활용한 요리들이
+                    여기에
                     있어요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('밑반찬')">
                 <h2 class="text-xl font-semibold mb-4">밑반찬</h2>
                 <p class="text-gray-700">주식과 함께 먹기 좋은 다양한 반찬 아이디어를 제공해드려요. 한 끼 식사를 더욱 풍부하고 맛있게 즐길 수 있어요.</p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('간식')">
                 <h2 class="text-xl font-semibold mb-4">간식</h2>
-                <p class="text-gray-700">간식 카테고리에서는 가볍게 즐기기 좋은 간식 아이디어들을 소개해드려요. 작은 양갱, 다양한 튀김 음식 등, 달콤하고 맛있는 간식을 찾아보세요.
+                <p class="text-gray-700">간식 카테고리에서는 가볍게 즐기기 좋은 간식 아이디어들을 소개해드려요. 작은 양갱, 다양한 튀김 음식 등, 달콤하고 맛있는 간식을
+                    찾아보세요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('간단요리')">
                 <h2 class="text-xl font-semibold mb-4">간단요리</h2>
-                <p class="text-gray-700">간단요리에서는 바쁜 일상 속에서도 손쉽게 만들 수 있는 간단하면서도 맛있는 레시피를 추천해드려요. 빠르게 요리하면서도 맛있게 즐기세요.</p>
-            </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
-                <h2 class="text-xl font-semibold mb-4">초대요리</h2>
-                <p class="text-gray-700">초대요리에서는 손님을 맞이할 때나 특별한 날에 준비하기 좋은 고급스러운 레시피를 소개해드려요. 특별한 순간을 더욱 특별하게 만들어보세요.
+                <p class="text-gray-700">간단요리에서는 바쁜 일상 속에서도 손쉽게 만들 수 있는 간단하면서도 맛있는 레시피를 추천해드려요. 빠르게 요리하면서도 맛있게 즐기세요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('초대요리')">
+                <h2 class="text-xl font-semibold mb-4">초대요리</h2>
+                <p class="text-gray-700">초대요리에서는 손님을 맞이할 때나 특별한 날에 준비하기 좋은 고급스러운 레시피를 소개해드려요. 특별한 순간을 더욱 특별하게
+                    만들어보세요.
+                </p>
+            </div>
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('향토음식')">
                 <h2 class="text-xl font-semibold mb-4">향토음식</h2>
                 <p class="text-gray-700">향토음식 카테고리에서는 지역 특산물이나 전통적인 레시피를 활용한 음식들을 추천해드려요. 지역의 맛과 특색을 경험해보세요.</p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('겨울음식')">
                 <h2 class="text-xl font-semibold mb-4">겨울음식</h2>
-                <p class="text-gray-700">겨울음식에서는 추운 계절에 어울리는 따뜻하고 푸짐한 요리 아이디어를 제공해드려요. 추운 겨울을 따뜻하게 녹여줄 음식을 찾아보세요.</p>
+                <p class="text-gray-700">겨울음식에서는 추운 계절에 어울리는 따뜻하고 푸짐한 요리 아이디어를 제공해드려요. 추운 겨울을 따뜻하게 녹여줄 음식을 찾아보세요.
+                </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('여름음식')">
                 <h2 class="text-xl font-semibold mb-4">여름음식</h2>
-                <p class="text-gray-700">여름음식 카테고리에서는 더운 여름철에 상큼하고 가볍게 즐길 수 있는 요리 아이디어를 소개해드려요. 여름철 신선한 식재료를 활용해 맛있는 음식을
+                <p class="text-gray-700">여름음식 카테고리에서는 더운 여름철에 상큼하고 가볍게 즐길 수 있는 요리 아이디어를 소개해드려요. 여름철 신선한 식재료를 활용해 맛있는
+                    음식을
                     만들어보세요.</p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option2 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectTheme('None')">
                 <h2 class="text-xl font-semibold mb-4">상관없음</h2>
                 <p class="text-gray-700">어떤 요리든 상관없이, 여러 다양한 맛과 조리 방법을 경험하고 싶다면 '상관없음' 옵션을 선택해보세요! </p>
             </div>
 
         </div>
 
-        <div class="option3 hidden grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+        <div class="options px-14 grid pt-8 grid-cols-1 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-3 gap-4">
+            <div class="option3 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectType('한식')">
                 <h2 class="text-xl font-semibold mb-4">한식</h2>
-                <p class="text-gray-700">한식은 전통적이고 맛있는 한국 음식을 추천해드려요. 한국의 다양한 맛과 향을 경험하고 싶다면 한식을 선택해보세요. 김치, 불고기,
-                    된장찌개와 같은 대표적인 음식들이 기다리고 있어요.
+                <p class="text-gray-700">한국의 풍부한 양념과 다양한 반찬을 즐기며, 한식의 깊은 맛과 건강에 좋은 재료를 만나보세요. 갓 지은 밥 한 공기에 고기와 야채의 조화,
+                    그리고 김치의 풍미는 정말 일품입니다.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
-                <h2 class="text-xl font-semibold mb-4">중식</h2>
-                <p class="text-gray-700">중식은 중국의 풍부한 맛과 다양성을 즐길 수 있는 음식을 추천해드려요. 짜장면, 탕수육, 송로우와 같은 중국의 대표적인 메뉴들을
-                    즐겨보세요. 다양한 맛과 향을 경험할 수 있을 거에요.</p>
-            </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option3 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectType('일식')">
                 <h2 class="text-xl font-semibold mb-4">일식</h2>
-                <p class="text-gray-700">일식 카테고리에서는 일본의 신선하고 독특한 맛을 경험할 수 있는 음식을 추천해드려요. 초밥, 라면, 돈까스 등 다양한 일본 음식이 여러분을
-                    기다리고 있어요.
+                <p class="text-gray-700">일본의 세련된 조리법과 신선한 재료를 통해 경이로운 맛을 경험하세요. 심플하면서도 정교한 일식 음식은 식감과 맛의 균형을 잘 살린 것이
+                    특징입니다.</p>
+            </div>
+            <div class="option3 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectType('중식')">
+                <h2 class="text-xl font-semibold mb-4">중식</h2>
+                <p class="text-gray-700">중국의 다양한 지역적 조리법을 통해 풍부한 맛과 향을 즐겨보세요. 중식은 다양한 소스와 향신료를 활용하여 독특한 맛을 만들어냅니다. 간장,
+                    마늘, 생강 등의 풍부한 향과 맛이 인상적입니다.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option3 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectType('양식')">
                 <h2 class="text-xl font-semibold mb-4">양식</h2>
-                <p class="text-gray-700">양식은 서양 음식의 다양한 풍미를 즐길 수 있어요. 스테이크, 파스타, 피자와 같은 양식 음식들이 여러분을 기다리고 있습니다.
-                    서양의 특별한 맛을 경험해보세요.
+                <p class="text-gray-700">양식은 서양의 다양한 요리 문화를 즐길 수 있는 기회입니다. 이탈리아의 파스타, 프랑스의 향긋한 빵, 미국의 감탄할 만한 스테이크 등을
+                    맛보세요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option3 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectType('None')">
                 <h2 class="text-xl font-semibold mb-4">상관없음</h2>
                 <p class="text-gray-700">어떤 요리든 상관없이, 여러 다양한 맛과 조리 방법을 경험하고 싶다면 '상관없음' 옵션을 선택해보세요! </p>
             </div>
+
         </div>
 
-        <div class="option4 hidden grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+        <div class="options px-14 grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('소고기')">
                 <h2 class="text-xl font-semibold mb-4">소고기</h2>
                 <p class="text-gray-700">고기의 꽃, 소고기! 담백하고 고소한 소고기로 만든 요리가 어떠세요? 예를 들면, 소고기 스테이크나 국거리로 제격이에요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('돼지고기')">
                 <h2 class="text-xl font-semibold mb-4">돼지고기</h2>
                 <p class="text-gray-700">돼지고기의 풍미는 독특해요. 고기의 쫄깃함이 일품인 돼지고기 요리를 즐겨보세요. 예를 들어, 돼지 불고기나 돼지갈비찜이 좋은 선택이죠.</p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('닭고기')">
                 <h2 class="text-xl font-semibold mb-4">닭고기</h2>
                 <p class="text-gray-700">가볍고 건강한 닭고기! 다양한 조리법으로 맛을 낼 수 있어요. 양념에 잘 어울리는 닭고기를 사용한 치킨 요리나 깔끔한 닭개장을 추천해드려요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('해물')">
                 <h2 class="text-xl font-semibold mb-4">해물</h2>
                 <p class="text-gray-700">신선한 해물의 맛은 일품이에요. 해물 파전이나 해물찜과 같이 다양한 해물을 즐길 수 있는 요리를 추천해드립니다.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('채소류')">
                 <h2 class="text-xl font-semibold mb-4">채소류</h2>
                 <p class="text-gray-700">건강을 생각하는 당신에게, 신선한 채소의 맛을 느낄 수 있는 요리를 추천해드려요. 샐러드나 채소볶음 등이 좋은 선택이겠죠.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('버섯류')">
                 <h2 class="text-xl font-semibold mb-4">버섯류</h2>
                 <p class="text-gray-700">고소한 향과 부드러운 식감이 매력인 버섯! 버섯 리조또나 버섯 스프 등, 다양한 요리에 활용해보세요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('과일류')">
                 <h2 class="text-xl font-semibold mb-4">과일류</h2>
                 <p class="text-gray-700">상큼한 과일의 맛을 느낄 수 있는 요리를 추천합니다. 과일 샐러드나 과일 스무디로 상쾌한 맛을 즐겨보세요.
                 </p>
             </div>
-            <div
-                class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+            <div class="option4 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectIngredients('None')">
                 <h2 class="text-xl font-semibold mb-4">상관없음</h2>
                 <p class="text-gray-700">어떤 요리든 상관없이, 여러 다양한 맛과 조리 방법을 경험하고 싶다면 '상관없음' 옵션을 선택해보세요! </p>
             </div>
         </div>
 
-    </div>
+        <div class="options px-14 grid pt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('볶음')">
+                <h2 class="text-xl font-semibold mb-4">볶음</h2>
+                <p class="text-gray-700">볶음 요리는 높은 온도에서 신속하게 조리하여 고소하고 맛있는 음식을 만듭니다. 재료를 잘게 썰어 빠르게 볶아내는 것이 요령이에요!</p>
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('끓이기')">
+                <h2 class="text-xl font-semibold mb-4">끓이기</h2>
+                <p class="text-gray-700">끓이기는 여러 재료를 함께 끓여 깊은 맛을 살릴 수 있는 방법입니다. 감칠맛 가득한 국물을 만들기 위해 재료의 순서와 조리 시간에 주의하세요.
+                </p>
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('튀김')">
+                <h2 class="text-xl font-semibold mb-4">튀김</h2>
+                <p class="text-gray-700">튀김은 바삭한 식감이 일품인 요리 방법입니다. 재료를 바삭하게 튀기기 위해서는 높은 기온과 적당한 식용유를 사용하는 것이 중요해요.</p>
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('비비기')">
+                <h2 class="text-xl font-semibold mb-4">비비기</h2>
+                <p class="text-gray-700">비비기는 소스를 특별한 방법으로 얹어 음식에 풍부한 맛을 더하는 요리 방법입니다. 소스의 양과 음식과의 궁합을 고려해보세요.</p>
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('굽기')">
+                <h2 class="text-xl font-semibold mb-4">굽기</h2>
+                <p class="text-gray-700">굽기는 간단하지만 깊은 풍미를 내는 방법 중 하나에요. 고기나 채소를 꼼꼼하게 익혀내어 고소한 향과 맛을 즐길 수 있습니다.
+                </p>
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('회')">
+                <h2 class="text-xl font-semibold mb-4">회</h2>
+                <p class="text-gray-700">회는 신선한 해산물을 활용한 색다른 음식입니다. 재료의 신선도와 잘게 썰어서 내는 기술이 중요한데요. 주의 깊게 다루어보세요!</p>
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('무침')">
+                <h2 class="text-xl font-semibold mb-4">무침</h2>
+                <p class="text-gray-700">무침은 신선한 채소나 해산물을 소스와 함께 어우러져 상큼하고 매콤한 맛을 즐기는 요리 방법입니다. 색다른 무침을 시도해보세요!
+            </div>
+            <div class="option5 bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300"
+                onclick="selectRecipe('None')">
+                <h2 class="text-xl font-semibold mb-4">상관없음</h2>
+                <p class="text-gray-700">어떤 요리든 상관없이, 여러 다양한 맛과 조리 방법을 경험하고 싶다면 '상관없음' 옵션을 선택해보세요! </p>
+            </div>
+        </div>
+
+        <div class="options px-14 grid pt-8 gap-4">
+            <div
+                class="option6 bg-white/20 p-6 rounded-md shadow-sm border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+                <h2 class="text-6xl font-semibold mb-4">맞춤 추천 (선택)</h2>
+                <p class="text-gray-700 text-3xl">당신의 개성에 맞게 맞춤형 메뉴를 제공하고 싶어요. 어떤 특별한 요청이든 적극적으로 수용하고 맛있는 요리로 제공할 수 있도록
+                    노력하겠습니다. 원하시는 특별한 옵션을 입력해주세요 (최대 50글자)</p>
+                <input type="text" maxlength="50"
+                    class="option6_text border-2 border-black rounded px-3 w-full mt-20 text-5xl">
+
+                <button type="submit"
+                    class="create_button flex w-full justify-center rounded-md bg-lime-300 px-3 py-5 mt-14 text-2xl font-semibold leading-6 text-black shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition ">추천
+                    받기</button>
+
+            </div>
+        </div>
+
+        <div class="options result px-14 grid pt-8 gap-4">
+            <div
+                class="option6 bg-white/20 p-6 rounded-md shadow-sm border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
+                <h2 class="text-6xl font-semibold mb-4">추천 메뉴!</h2>
+                <p class="text-gray-700 text-3xl">당신의 개성에 맞게 맞춤형 메뉴를 제공하고 싶어요. 어떤 특별한 요청이든 적극적으로 수용하고 맛있는 요리로 제공할 수 있도록
+                    노력하겠습니다. 원하시는 특별한 옵션을 입력해주세요 (최대 50글자)</p>
+                <input type="text" maxlength="50"
+                    class="option6_text border-2 border-black rounded px-3 w-full mt-20 text-5xl">
+
+                <button type="submit"
+                    class="create_button flex w-full justify-center rounded-md bg-lime-300 px-3 py-5 mt-14 text-2xl font-semibold leading-6 text-black shadow-sm hover:bg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition ">추천
+                    받기</button>
+
+            </div>
+        </div>
     </div>
 
 </body>
 <footer class="pt-4 my-md-5 pt-md-5 border-top w-full text-center">
     <p class="text-sm">&copy; 2023. Django_ChatBot KIMCHANGHWAN</p>
 </footer>
+<script src="/src/js/create.js"></script>
 
 </html>
