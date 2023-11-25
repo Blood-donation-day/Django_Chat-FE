@@ -9,3 +9,4 @@ const mainpage = page + "/index.html";
 const loginpage = page + "/src/HTML/login.html";
 const mypage = page + "/src/HTML/mypage.html";
 const profilepage = page + "/src/HTML/profile.html";
+const createpage = page + "/src/HTML/create.html";

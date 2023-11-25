@@ -7,6 +7,12 @@ function MainSet() {
   const navprofileimage = document.querySelector(".nav-profile-image");
   const profileimage = document.querySelector(".profile_image");
   const today_limit = document.querySelector(".today_limit");
+  const createbutton = document.querySelector("#create");
+
+  createbutton.addEventListener("click", (e) => {
+    e.preventDefault();
+    location.href = createpage;
+  });
 
   async function GetProfile() {
     try {
