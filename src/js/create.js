@@ -139,7 +139,6 @@ function loadResult(result) {
 
   const foodname = food.추천메뉴;
   const introduce = food.소개;
-  const ingredients = food.재료;
   const recipe = food.레시피;
 
   $foodname = document.querySelector(".foodname");

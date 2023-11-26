@@ -43,7 +43,7 @@ const signup = async (e) => {
       localStorage.setItem("user", JSON.stringify(user));
 
       alert("회원가입이 성공적으로 완료되었습니다.");
-      window.location.href = mypage;
+      window.location.href = loginpage;
     } else {
       const errorData = await response.json();
       console.error("회원가입 실패:", errorData);

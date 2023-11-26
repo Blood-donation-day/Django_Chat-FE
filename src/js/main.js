@@ -166,6 +166,7 @@ function getMyFood() {
   //화면에 받은 데이터를 표시
   function displayFood(data) {
     const foodListElement = document.querySelector(".food_list");
+
     foodListElement.innerHTML = "";
     data.forEach((food) => {
       const foodItem = document.createElement("div");
@@ -182,8 +183,16 @@ function getMyFood() {
         "transition-colors",
         "duration-300"
       );
-
+      foodItem.dataset.pk = food.pk;
+      foodItem.addEventListener("click", openModal);
       const title = document.createElement("h2");
+
+      const thumbnail = document.createElement("img");
+      thumbnail.classList.add("my-4");
+      thumbnail.src = url + food.thumbnail;
+      thumbnail.alt = "Food Thumbnail";
+      thumbnail.style.width = "100%";
+
       title.classList.add("text-xl", "font-semibold", "mb-4");
       title.textContent = food.foodname;
 
@@ -198,18 +207,75 @@ function getMyFood() {
         ingredients.innerHTML += ingredient.trim() + "<br>";
       });
 
+      foodItem.appendChild(thumbnail);
       foodItem.appendChild(title);
       foodItem.appendChild(ingredients);
       foodListElement.appendChild(foodItem);
     });
   }
-
+  const $modal = document.querySelector(".modal_title");
   const $prevbutton = document.querySelector(".prev_page");
   const $currentpage = document.querySelector(".current_page");
   const $nextbutton = document.querySelector(".next_page");
 
   $prevbutton.addEventListener("click", prevPage);
   $nextbutton.addEventListener("click", nextPage);
+
+  async function getFoodDetail(pk) {
+    try {
+      const response = await fetch(createurl + `${pk}/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getCookie("access"),
+        },
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        loadDetail(data);
+      } else if (response.status === 401) {
+        RefreshAccessToken();
+        getFoodDetail();
+      }
+    } catch (error) {
+      console.error("에러 발생: ", error);
+    }
+  }
+  function loadDetail(data) {
+    const $modalfoodname = document.querySelector(".modal_foodname");
+    const $modalthumbnail = document.querySelector(".modal_thumbnail");
+    const $modaldescription = document.querySelector(".modal_description");
+    const $modalingredients = document.querySelector(".modal_ingredients");
+    const $modalrecipe = document.querySelector(".modal_recipe");
+    const $modalcreated = document.querySelector(".modal_created_at");
+
+    $modalfoodname.innerHTML = data.foodname;
+    $modalthumbnail.src = data.thumbnail;
+    $modaldescription.innerHTML = data.intro;
+
+    $modalingredients.innerHTML = "";
+    const ingredientsArray = data.ingredients.replace(/['{}]/g, "").split(",");
+    ingredientsArray.forEach((ingredient) => {
+      $modalingredients.innerHTML += ingredient.trim() + "<br>";
+    });
+
+    $modalrecipe.innerHTML = data.recipe;
+
+    $modalcreated.innerHTML = data.created_at;
+  }
+  const $modalback = document.querySelector(".modal_back");
+  $modalback.addEventListener("click", (e) => {
+    if (e.target === $modalback) {
+      $modal.classList.toggle("hidden");
+    }
+  });
+  function nextPage() {
+    currentpage += 1;
+    getFood(currentpage);
+    $currentpage.innerHTML = `${currentpage}페이지`;
+  }
 
   function prevPage() {
     if (currentpage === 1) {
@@ -220,9 +286,9 @@ function getMyFood() {
     $currentpage.innerHTML = `${currentpage}페이지`;
   }
 
-  function nextPage() {
-    currentpage += 1;
-    getFood(currentpage);
-    $currentpage.innerHTML = `${currentpage}페이지`;
+  function openModal(e) {
+    const pk = e.currentTarget.dataset.pk;
+    $modal.classList.toggle("hidden");
+    getFoodDetail(pk);
   }
 }
