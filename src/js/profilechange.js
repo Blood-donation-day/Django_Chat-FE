@@ -49,9 +49,7 @@ function ProfileChangeSet() {
         const updatedProfileData = await response.json();
         console.log("프로필이 업데이트되었습니다.", updatedProfileData);
 
-        const curuser = JSON.parse(localStorage.getItem("user"));
-        curuser.lastupdate = updatedProfileData.lastupdate;
-        localStorage.setItem("user", JSON.stringify(curuser));
+        await updateLastupdate(updatedProfileData);
 
         localStorage.setItem(
           "Localprofiledata",
@@ -125,4 +123,10 @@ function ProfileChangeSet() {
       introduce.value = profiledata.introduce;
     }
   }
+}
+
+function updateLastupdate(updatedProfileData) {
+  const curuser = JSON.parse(localStorage.getItem("user"));
+  curuser.lastupdate = updatedProfileData.lastupdate;
+  localStorage.setItem("user", JSON.stringify(curuser));
 }

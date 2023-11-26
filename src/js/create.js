@@ -115,7 +115,8 @@ async function createFood(message) {
 
     if (response.ok) {
       const result = await response.json();
-      console.log(result);
+      console.log("응답을 받았습니다: ", result);
+      updateTodaylimit(result);
       loadResult(result);
     } else if (response.status === 401) {
       await RefreshAccessToken();
@@ -123,6 +124,8 @@ async function createFood(message) {
     } else if (response.status === 403) {
       alert("오늘 무료 횟수를 모두 소진하셨습니다. 내일 다시 시도해주세요.");
       location.reload();
+    } else if (response.status === 400) {
+      modelError();
     } else {
       console.log(response.json);
     }
@@ -132,6 +135,53 @@ async function createFood(message) {
 }
 
 function loadResult(result) {
+  const food = JSON.parse(result.Food);
+
+  const foodname = food.추천메뉴;
+  const introduce = food.소개;
+  const ingredients = food.재료;
+  const recipe = food.레시피;
+
   $foodname = document.querySelector(".foodname");
   $introduce = document.querySelector(".introduce");
+  $ingredients = document.querySelector(".ingredients");
+  $recipe = document.querySelector(".recipe");
+
+  $foodname.innerHTML = foodname;
+  $introduce.innerHTML = introduce;
+  $ingredients.style.display = "block";
+  $ingredients.innerHTML =
+    "재료:<br>" +
+    Object.entries(food.재료)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join("<br>");
+  $recipe.innerHTML = "레시피:<br>" + convertRecipeToHTML(recipe);
+  $recipe.style.display = "block";
+}
+
+function convertRecipeToHTML(recipe) {
+  if (Array.isArray(recipe)) {
+    // 레시피가 배열인 경우
+    return recipe.map((step) => step.replace(/\n/g, "<br>")).join("<br><br>");
+  } else if (typeof recipe === "string") {
+    // 레시피가 문자열인 경우
+    return recipe.replace(/\n/g, "<br>");
+  } else {
+    return false;
+  }
+}
+
+function modelError() {
+  $foodname = document.querySelector(".foodname");
+  $introduce = document.querySelector(".introduce");
+
+  $foodname.innerHTML = "모델 생성 에러";
+  $introduce.innerHTML =
+    "죄송합니다.  모델 생성 중에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.";
+}
+
+function updateTodaylimit(result) {
+  const curuser = JSON.parse(localStorage.getItem("user"));
+  curuser.today_limit = result.today_limit;
+  localStorage.setItem("user", JSON.stringify(curuser));
 }
