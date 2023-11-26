@@ -261,9 +261,20 @@ function getMyFood() {
       $modalingredients.innerHTML += ingredient.trim() + "<br>";
     });
 
-    $modalrecipe.innerHTML = data.recipe;
+    $modalrecipe.innerHTML = data.recipe.replace(/\n/g, "<br>");
 
-    $modalcreated.innerHTML = data.created_at;
+    const date = new Date(data.created_at);
+    const datetime = `${date.getFullYear()}-${padZero(
+      date.getMonth() + 1
+    )}-${padZero(date.getDate())} ${padZero(date.getHours())}:${padZero(
+      date.getMinutes()
+    )}`;
+
+    function padZero(num) {
+      return num.toString().padStart(2, "0");
+    }
+
+    $modalcreated.innerHTML = "생성일자: " + datetime;
   }
   const $modalback = document.querySelector(".modal_back");
   $modalback.addEventListener("click", (e) => {
@@ -271,6 +282,12 @@ function getMyFood() {
       $modal.classList.toggle("hidden");
     }
   });
+
+  function openModal(e) {
+    const pk = e.currentTarget.dataset.pk;
+    $modal.classList.toggle("hidden");
+    getFoodDetail(pk);
+  }
   function nextPage() {
     currentpage += 1;
     getFood(currentpage);
@@ -284,11 +301,5 @@ function getMyFood() {
     currentpage -= 1;
     getFood(currentpage);
     $currentpage.innerHTML = `${currentpage}페이지`;
-  }
-
-  function openModal(e) {
-    const pk = e.currentTarget.dataset.pk;
-    $modal.classList.toggle("hidden");
-    getFoodDetail(pk);
   }
 }
