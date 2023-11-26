@@ -51,7 +51,7 @@
                         role="menuitem" tabindex="-1" id="user-menu-item-0">내 프로필</a>
                     <a href=""
                         class="modal_login hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
-                        role="menuitem" tabindex="-1" id="user-menu-item-2">로그인</a>
+                        role="menuitem" tabindex="-1" id="user-menu-item-1">로그인</a>
                     <a href=""
                         class="modal_logout hidden hover:bg-gray-300 hover:font-bold block px-4 py-2 text-sm text-gray-700"
                         role="menuitem" tabindex="-1" id="user-menu-item-2">로그아웃</a>
@@ -63,165 +63,19 @@
         </div>
     </nav>
 
-
-
-
-
-    <div class="bg-gray-100 flex items-center justify-center py-28">
-        <!-- <div class="sm:block hidden px-5 w-96">
-            <div class="flex flex-col items-start bg-gray-500 rounded-md lg:px-2">
-                <div class="flex flex-col w-full px-4">
-                    <p class="pt-5">
-                        <a class="text-lg text-purple-300 font-medium underline decoration-solid"
-                            href="/src/HTML/profile.html">
-                            <img src="/src/img/edit.png" class="w-10 h-10">
-                        </a>
-                        <img class="profile_image h-24 w-24 m-auto rounded-full" src="/src/img/profile-default.jpg"
-                            width="150px" alt="profile_img" />
-                    </p>
-
-                    <div class="flex flex-col flex-wrap justify-between">
-                        <div class="nick">
-                            <h2
-                                class="mt-2 username text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">
-                                닉네임
-                            </h2>
-                        </div>
-                        <div class="edit_profile mt-4">
-                        </div>
-                    </div>
-                    <textarea
-                        class="bg-gray-400 rounded m-auto mt-4 pt-2 pb-2 text-lg pl-2 font-medium w-full resize-none scrollbar-hide"
-                        name="introduce" maxlength="200" id="id_introduce" rows="2" readonly
-                        placeholder="자기소개를 해주세요.">자기소개를 해주세요</textarea>
-                    <div class="profile_detail pt-3 pl-4">
-                        <p class="today_limit pt-2 text-lg font-medium pb-4">
-                            남은 횟수: 5
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-
-        </div> -->
-
-        <div class="w-11/12 sm:w-11/12 md:w-10/12 lg:w-10/12 bg-white p-6 rounded-lg shadow-sm">
-            <div class="w-full flex justify-between items-center p-3">
-                <h2 class="text-3xl font-semibold">내 기록</h2>
-                <button id="openModalBtn"
-                    class="flex items-center bg-black  border border-black text-white font-semibold py-2 px-4 rounded-md transition-colors duration-300">
-                    <svg class="w-4 h-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    <p class="text-white">새로운 추천받기</p>
-                </button>
-            </div>
-            <div class="w-full flex justify-center p-1 mb-4">
-                <div class="relative w-full">
-                    <input type="search"
-                        class="w-full  bg-white py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-black transition-colors duration-300"
-                        name='q' placeholder="기록에서 검색...">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                <!-- Card 1 -->
-                <div
-                    class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
-                    <h2 class="text-xl font-semibold mb-4">Project 1</h2>
-                    <p class="text-gray-700">Description of Project 2 goes here. You can provide more details about the
-                        project.</p>
-                    <div class="col-start-2 row-start-1 row-end-3 sm:mt-4 lg:mt-4 xl:mt-4">
-                        <dd class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5">
-                            <img src="https://placekitten.com/48/48" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/49/49" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/50/50" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/51/51" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/52/52" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                        </dd>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div
-                    class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
-                    <h2 class="text-xl font-semibold mb-4">Project 2</h2>
-                    <p class="text-gray-700">Description of Project 2 goes here. You can provide more details about the
-                        project.</p>
-                    <div class="col-start-2 row-start-1 row-end-3 sm:mt-4 lg:mt-4 xl:mt-4">
-                        <dd class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5">
-                            <img src="https://placekitten.com/48/48" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/49/49" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/50/50" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/51/51" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/52/52" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                        </dd>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div
-                    class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
-                    <h2 class="text-xl font-semibold mb-4">Project 3</h2>
-                    <p class="text-gray-700">Description of Project 2 goes here. You can provide more details about the
-                        project.</p>
-                    <div class="col-start-2 row-start-1 row-end-3 sm:mt-4 lg:mt-4 xl:mt-4">
-                        <dd class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5">
-                            <img src="https://placekitten.com/48/48" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/49/49" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/50/50" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/51/51" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/52/52" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                        </dd>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div
-                    class=" bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-black hover:border-2 transition-colors duration-300">
-                    <h2 class="text-xl font-semibold mb-4">Project 4</h2>
-                    <p class="text-gray-700">Description of Project 2 goes here. You can provide more details about the
-                        project.</p>
-                    <div class="col-start-2 row-start-1 row-end-3 sm:mt-4 lg:mt-4 xl:mt-4">
-                        <dd class="flex justify-end sm:justify-start lg:justify-end xl:justify-start -space-x-1.5">
-                            <img src="https://placekitten.com/48/48" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/49/49" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/50/50" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/51/51" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                            <img src="https://placekitten.com/52/52" alt="" class="w-6 h-6 rounded-full bg-black"
-                                loading="lazy">
-                        </dd>
-                    </div>
-                </div>
-
-            </div>
+    <div class="mt-24 mx-auto w-11/12 justify-center bg-white px-6 pt-1 rounded-lg shadow-sm">
+        <div class="w-full flex justify-between items-center p-3">
+            <h2 class="text-5xl font-semibold">🤖 요리 추천 서비스</h2>
         </div>
-    </div>
+        <p class="p-3 text-2xl"> 🍽️ 맛있는 음식을 찾는 여행에 함께해요! 여러분이 원하는 음식의 스타일과 맞춰, 그에 어울리는 다양한 레시피와 재료 정보를 제공해드릴게요. 입맛에 맞게
+            조절할 수 있는 옵션도 알려주세요! 혹시 특별한 식사 계획이 있나요? 🍔🥗 이미지를 클릭해 바로 시작해보세요!</p>
 
+    </div>
+    <a href="/src/HTML/create.html">
+        <div class="options-container flex flex-nowrap w-full px-3">
+            <img src="/src/img/mainintro.gif" alt="" class="w-full">
+        </div>
+    </a>
 </body>
 <footer class="pt-4 my-md-5 pt-md-5 border-top w-full text-center">
     <p class="text-sm">&copy; 2023. Django_ChatBot KIMCHANGHWAN</p>
