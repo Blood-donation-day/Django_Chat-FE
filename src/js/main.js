@@ -1,5 +1,6 @@
 //프로필 정보
 MainSet();
+getMyFood();
 
 function MainSet() {
   const username = document.querySelector(".username");
@@ -128,4 +129,100 @@ function MainSet() {
   }
 
   GetProfile();
+}
+
+function getMyFood() {
+  let currentpage = 1;
+  getFood(currentpage);
+
+  async function getFood(page) {
+    try {
+      const response = await fetch(createurl + `?page=${page}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + getCookie("access"),
+        },
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        displayFood(data);
+      } else if (response.status === 401) {
+        RefreshAccessToken();
+        getFood();
+      } else if (response.status === 404) {
+        // 마지막 페이지인 경우
+        currentpage -= 1;
+        alert("마지막 페이지입니다.");
+        $currentpage.innerHTML = `${currentpage}페이지`;
+      }
+    } catch (error) {
+      console.error("에러 발생: ", error);
+    }
+  }
+
+  //화면에 받은 데이터를 표시
+  function displayFood(data) {
+    const foodListElement = document.querySelector(".food_list");
+    foodListElement.innerHTML = "";
+    data.forEach((food) => {
+      const foodItem = document.createElement("div");
+      foodItem.classList.add(
+        "bg-white/20",
+        "p-6",
+        "rounded-md",
+        "shadow-sm",
+        "cursor-pointer",
+        "border-2",
+        "border-gray-50",
+        "hover:border-black",
+        "hover:border-2",
+        "transition-colors",
+        "duration-300"
+      );
+
+      const title = document.createElement("h2");
+      title.classList.add("text-xl", "font-semibold", "mb-4");
+      title.textContent = food.foodname;
+
+      const ingredients = document.createElement("p");
+      ingredients.classList.add("text-gray-700");
+      const ingredientsArray = food.ingredients
+        .replace(/['{}]/g, "")
+        .split(",");
+
+      ingredientsArray.forEach((ingredient) => {
+        // 각 항목을 개별적으로 표시
+        ingredients.innerHTML += ingredient.trim() + "<br>";
+      });
+
+      foodItem.appendChild(title);
+      foodItem.appendChild(ingredients);
+      foodListElement.appendChild(foodItem);
+    });
+  }
+
+  const $prevbutton = document.querySelector(".prev_page");
+  const $currentpage = document.querySelector(".current_page");
+  const $nextbutton = document.querySelector(".next_page");
+
+  $prevbutton.addEventListener("click", prevPage);
+  $nextbutton.addEventListener("click", nextPage);
+
+  function prevPage() {
+    if (currentpage === 1) {
+      return;
+    }
+    currentpage -= 1;
+    getFood(currentpage);
+    $currentpage.innerHTML = `${currentpage}페이지`;
+  }
+
+  function nextPage() {
+    currentpage += 1;
+    getFood(currentpage);
+    $currentpage.innerHTML = `${currentpage}페이지`;
+  }
 }
