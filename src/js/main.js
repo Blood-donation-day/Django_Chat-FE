@@ -28,7 +28,10 @@ function MainSet() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + getCookie("access"),
+            // Authorization: "Bearer " + getCookie("access"),
+          },
+          body: {
+            access: getToken("access"),
           },
           credentials: "include",
         });
@@ -63,6 +66,10 @@ function MainSet() {
         headers: {
           "Content-Type": "application/json",
         },
+        body: {
+          access: getToken("access"),
+          refresh: getToken("refresh"),
+        },
         credentials: "include",
       });
 
@@ -75,6 +82,13 @@ function MainSet() {
       if (response.ok) {
         const refreshData = await response.json();
         console.log("토큰 재발급 완료", refreshData);
+
+        const token = {
+          access: refreshData.access,
+          refresh: getToken("refresh"),
+        };
+        localStorage.setItem("token", JSON.stringify(token));
+
         await RefreshData();
         await GetProfile();
 
@@ -96,7 +110,10 @@ function MainSet() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getCookie("access"),
+        // Authorization: "Bearer " + getCookie("access"),
+      },
+      body: {
+        access: getToken("access"),
       },
       credentials: "include",
     });
@@ -141,7 +158,10 @@ function getMyFood() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + getCookie("access"),
+          // Authorization: "Bearer " + getCookie("access"),
+        },
+        body: {
+          access: getToken("access"),
         },
         credentials: "include",
       });
@@ -227,7 +247,10 @@ function getMyFood() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + getCookie("access"),
+          // Authorization: "Bearer " + getCookie("access"),
+        },
+        body: {
+          access: getToken("access"),
         },
         credentials: "include",
       });

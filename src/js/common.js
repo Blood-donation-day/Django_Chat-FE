@@ -21,6 +21,12 @@ function getCookie(name) {
   return null;
 }
 
+function getToken(name) {
+  localtoken = localStorage.getItem("token");
+  token = JSON.parse(localtoken);
+  return token[name];
+}
+
 //401 응답받으면 해당 함수 호출
 async function RefreshAccessToken() {
   try {
