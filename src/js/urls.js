@@ -5,7 +5,7 @@ const loginurl = url + "/accounts/login/";
 const signupurl = url + "/accounts/signup/";
 const createurl = url + "/chatting/";
 
-const page = "http://127.0.0.1:5500";
+const page = "https://blood-donation-day.github.io/Django_Chat-FE";
 const mainpage = page + "/index.html";
 const loginpage = page + "/src/HTML/login.html";
 const mypage = page + "/src/HTML/mypage.html";
