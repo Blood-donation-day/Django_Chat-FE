@@ -60,9 +60,14 @@ function getMyFood() {
   let currentpage = 1;
   getFood(currentpage);
 
-  async function getFood(page) {
+  async function getFood(page, q = null) {
     try {
-      const response = await fetch(createurl + `?page=${page}`, {
+      let url = createurl + `?page=${page}`;
+      if (q) {
+        url += `&q=${q}`;
+      }
+
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -89,6 +94,15 @@ function getMyFood() {
     }
   }
 
+  const $search = document.querySelector(".search");
+  $search.addEventListener("keydown", function (e) {
+    // 엔터 키의 keyCode는 13입니다.
+    if (e.keyCode === 13) {
+      q = $search.value;
+      getFood(currentpage, q);
+      e.preventDefault();
+    }
+  });
   //화면에 받은 데이터를 표시
   function displayFood(data) {
     const foodListElement = document.querySelector(".food_list");
@@ -139,6 +153,7 @@ function getMyFood() {
       foodListElement.appendChild(foodItem);
     });
   }
+
   const $modal = document.querySelector(".modal_title");
   const $prevbutton = document.querySelector(".prev_page");
   const $currentpage = document.querySelector(".current_page");
@@ -217,7 +232,8 @@ function getMyFood() {
   }
   function nextPage() {
     currentpage += 1;
-    getFood(currentpage);
+    const q = $search.value;
+    getFood(currentpage, q);
     $currentpage.innerHTML = `${currentpage}페이지`;
   }
 
@@ -226,7 +242,8 @@ function getMyFood() {
       return;
     }
     currentpage -= 1;
-    getFood(currentpage);
+    const q = $search.value;
+    getFood(currentpage, q);
     $currentpage.innerHTML = `${currentpage}페이지`;
   }
 }
