@@ -144,14 +144,13 @@ function MainSet() {
     today_limit.innerHTML =
       "남은 횟수: " + JSON.parse(localStorage.getItem("user")).today_limit;
   }
-
-  GetProfile();
-
   function getToken(name) {
     localtoken = localStorage.getItem("token");
     token = JSON.parse(localtoken);
     return token[name];
   }
+
+  GetProfile();
 }
 
 function getMyFood() {
