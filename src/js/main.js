@@ -66,8 +66,7 @@ function getMyFood() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: getToken("access"),
-          // access: getToken("access"),
+          Authorization: `Bearer ${getToken("access")}`,
         },
 
         credentials: "include",
@@ -164,8 +163,8 @@ function getMyFood() {
         console.log(data);
         loadDetail(data);
       } else if (response.status === 401) {
-        RefreshAccessToken();
-        getFoodDetail();
+        await RefreshAccessToken();
+        await getFoodDetail(pk);
       }
     } catch (error) {
       console.error("에러 발생: ", error);

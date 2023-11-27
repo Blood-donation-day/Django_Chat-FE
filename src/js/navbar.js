@@ -35,25 +35,12 @@ function NavbarSet() {
     }
     deleteCookie("refresh");
     deleteCookie("access");
+    ClearLocal();
     alert("로그아웃 되었습니다.");
     location.reload();
   }
 
-  function getCookie(name) {
-    const cookieString = document.cookie;
-    const cookies = cookieString.split(";").map((cookie) => cookie.trim());
-
-    for (const cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === name) {
-        return value;
-      }
-    }
-
-    return null;
-  }
-
-  const access = getCookie("access");
+  const access = getToken("access");
 
   if (access) {
     $loginbutton.style.display = "none";

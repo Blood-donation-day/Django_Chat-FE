@@ -24,6 +24,13 @@ function getCookie(name) {
 
 function getToken(name) {
   localtoken = localStorage.getItem("token");
+
+  if (localtoken === null) {
+    // 토큰이 없으면 로그인 페이지로 이동
+    window.location.href = loginpage;
+    return false;
+  }
+
   token = JSON.parse(localtoken);
   return token[name];
 }
@@ -36,9 +43,7 @@ async function RefreshAccessToken() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
-        refresh: `Bearer ${getToken("access")}`,
-      },
+      body: JSON.stringify({ refresh: getToken("refresh") }),
       credentials: "include",
     });
 
@@ -95,61 +100,22 @@ async function postfetchUrl(url, body) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: getToken("access"),
+      Authorization: `Bearer ${getToken("access")}`,
     },
-    body: {
-      body,
-    },
+    body: JSON.stringify(body),
+
     credentials: "include",
   });
 
   if (response.ok) {
-    const response = await response.json();
-    return response;
+    const responseData = await response.json();
+    return responseData;
   } else if (response.status === 401) {
     // 토큰 만료시 리프레시 토큰을 사용하여 엑세스 토큰 재발급 후 다시 요청
-    await RefreshAccessToken();
+    await RefreshAccessToken().then(() => postfetchUrl(url, body));
   } else {
     const errorData = await response.json();
     console.error("요청 실패:", errorData.message);
     return;
-  }
-}
-
-async function RefreshAccessToken() {
-  try {
-    const response = await fetch(refreshurl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {
-        refresh: getToken("refresh"),
-      },
-      credentials: "include",
-    });
-
-    //리프레쉬 토큰이 만료되었다면 로그인 페이지로 이동
-    if (response.status === 500) {
-      window.location.href = loginpage;
-    }
-
-    //리프레쉬 토큰이 만료되지 않고 엑세스 토큰을 재발급하는 경우
-    if (response.ok) {
-      const refreshData = await response.json();
-      console.log("토큰 재발급 완료", refreshData);
-      const token = {
-        access: refreshData.access,
-        refresh: getToken("refresh"),
-      };
-      localStorage.setItem("token", JSON.stringify(token));
-
-      //기타 에러 처리
-    } else {
-      const errorData = await response.json();
-      console.error("재발급 실패", errorData.message);
-    }
-  } catch (error) {
-    console.error("토큰 갱신 에러", error);
   }
 }

@@ -105,7 +105,7 @@ async function createFood(message) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getCookie("access"),
+        Authorization: "Bearer " + getToken("access"),
       },
       credentials: "include",
       body: JSON.stringify({
