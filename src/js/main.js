@@ -146,6 +146,12 @@ function MainSet() {
   }
 
   GetProfile();
+
+  function getToken(name) {
+    localtoken = localStorage.getItem("token");
+    token = JSON.parse(localtoken);
+    return token[name];
+  }
 }
 
 function getMyFood() {
