@@ -25,6 +25,13 @@ async function login() {
         today_limit: logindata.today_limit,
       };
       localStorage.setItem("user", JSON.stringify(user));
+
+      const token = {
+        access: logindata.token.access,
+        refresh: logindata.token.refresh,
+      };
+      localStorage.setItem("token", JSON.stringify(token));
+
       window.location.href = mypage;
     } else {
       //실패 시
