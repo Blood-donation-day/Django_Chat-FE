@@ -29,10 +29,9 @@ function MainSet() {
           headers: {
             "Content-Type": "application/json",
             // Authorization: "Bearer " + getCookie("access"),
-          },
-          body: {
             access: getToken("access"),
           },
+
           credentials: "include",
         });
 
@@ -65,11 +64,10 @@ function MainSet() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: {
           access: getToken("access"),
           refresh: getToken("refresh"),
         },
+
         credentials: "include",
       });
 
@@ -111,10 +109,9 @@ function MainSet() {
       headers: {
         "Content-Type": "application/json",
         // Authorization: "Bearer " + getCookie("access"),
-      },
-      body: {
         access: getToken("access"),
       },
+
       credentials: "include",
     });
 
@@ -164,10 +161,9 @@ function getMyFood() {
         headers: {
           "Content-Type": "application/json",
           // Authorization: "Bearer " + getCookie("access"),
-        },
-        body: {
           access: getToken("access"),
         },
+
         credentials: "include",
       });
       if (response.ok) {
@@ -253,10 +249,9 @@ function getMyFood() {
         headers: {
           "Content-Type": "application/json",
           // Authorization: "Bearer " + getCookie("access"),
-        },
-        body: {
           access: getToken("access"),
         },
+
         credentials: "include",
       });
       if (response.ok) {
