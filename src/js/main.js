@@ -151,7 +151,7 @@ function getMyFood() {
         displayFood(data);
       } else if (response.status === 401) {
         await RefreshAccessToken();
-        await getFood();
+        await getFood(currentpage);
       } else if (response.status === 404) {
         // 마지막 페이지인 경우
         currentpage -= 1;
