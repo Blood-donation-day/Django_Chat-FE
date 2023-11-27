@@ -24,103 +24,14 @@ function MainSet() {
         const localProfile = JSON.parse(localProfileData);
         Updateprofile(localProfile);
       } else {
-        const response = await fetch(profileurl, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: "Bearer " + getCookie("access"),
-            access: getToken("access"),
-          },
+        const profile = await getfetchUrl(profileurl);
+        console.log("프로필: ", profile);
 
-          credentials: "include",
-        });
-
-        if (response.ok) {
-          const serverProfile = await response.json();
-          console.log("프로필: ", serverProfile);
-          Updateprofile(serverProfile);
-
-          localStorage.setItem(
-            "Localprofiledata",
-            JSON.stringify(serverProfile)
-          );
-        } else if (response.status === 401) {
-          // 토큰 만료시 리프레시 토큰을 사용하여 엑세스 토큰 재발급 후 다시 요청
-          await RefreshAccessToken();
-        } else {
-          const errorData = await response.json();
-          console.error("요청 실패:", errorData.message);
-        }
+        Updateprofile(profile);
+        localStorage.setItem("Localprofiledata", JSON.stringify(profile));
       }
     } catch (error) {
       console.error("요청 에러:", error);
-    }
-  }
-
-  // 리프레쉬 토큰으로 엑세스 토큰을 재발급 받기
-  async function RefreshAccessToken() {
-    try {
-      const response = await fetch(loginurl, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          access: getToken("access"),
-          refresh: getToken("refresh"),
-        },
-
-        credentials: "include",
-      });
-
-      //리프레쉬 토큰이 만료되었다면 로그인 페이지로 이동
-      if (response.status === 500) {
-        window.location.href = loginpage;
-      }
-
-      //리프레쉬 토큰이 만료되지 않고 엑세스 토큰을 재발급하는 경우
-      if (response.ok) {
-        const refreshData = await response.json();
-        console.log("토큰 재발급 완료", refreshData);
-
-        const token = {
-          access: refreshData.access,
-          refresh: getToken("refresh"),
-        };
-        localStorage.setItem("token", JSON.stringify(token));
-
-        await RefreshData();
-        await GetProfile();
-
-        //기타 에러 처리
-      } else {
-        const errorData = await response.json();
-        console.error("재발급 실패", errorData.message);
-
-        // 리프레쉬 토큰이 만료되면 여기로 와서 로그인 페이지로 이동
-        window.location.href = loginpage;
-      }
-    } catch (error) {
-      console.error("토큰 갱신 에러", error);
-    }
-  }
-
-  async function RefreshData() {
-    const response = await fetch(profileurl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: "Bearer " + getCookie("access"),
-        access: getToken("access"),
-      },
-
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const serverProfile = await response.json();
-      console.log("프로필: ", serverProfile);
-      Updateprofile(serverProfile);
-
-      localStorage.setItem("Localprofiledata", JSON.stringify(serverProfile));
     }
   }
 
@@ -141,11 +52,6 @@ function MainSet() {
     today_limit.innerHTML =
       "남은 횟수: " + JSON.parse(localStorage.getItem("user")).today_limit;
   }
-  function getToken(name) {
-    localtoken = localStorage.getItem("token");
-    token = JSON.parse(localtoken);
-    return token[name];
-  }
 
   GetProfile();
 }
@@ -160,8 +66,8 @@ function getMyFood() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: "Bearer " + getCookie("access"),
-          access: getToken("access"),
+          Authorization: getToken("access"),
+          // access: getToken("access"),
         },
 
         credentials: "include",
@@ -248,8 +154,7 @@ function getMyFood() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: "Bearer " + getCookie("access"),
-          access: getToken("access"),
+          Authorization: `Bearer ${getToken("access")}`,
         },
 
         credentials: "include",
