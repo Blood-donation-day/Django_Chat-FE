@@ -3,6 +3,7 @@ const url = "http://127.0.0.1:8000";
 const profileurl = url + "/accounts/profile/";
 const loginurl = url + "/accounts/login/";
 const signupurl = url + "/accounts/signup/";
+const refreshurl = url + "/accounts/refresh/";
 const createurl = url + "/chatting/";
 
 const page = "https://blood-donation-day.github.io/Django_Chat-FE";
