@@ -1,5 +1,5 @@
 //url 정리
-const url = "http://127.0.0.1:8000";
+const url = "http://43.202.169.34";
 const profileurl = url + "/accounts/profile/";
 const loginurl = url + "/accounts/login/";
 const signupurl = url + "/accounts/signup/";
