@@ -47,8 +47,10 @@ const signup = async (e) => {
     } else {
       const errorData = await response.json();
       console.error("회원가입 실패:", errorData);
-
-      alert(errorData.password[0]);
+      const erroremail = errorData.email;
+      const errorepassword = errorData.password;
+      const errors = erroremail || errorepassword;
+      alert(errors);
     }
   } catch (error) {
     console.error("에러 발생:", error);

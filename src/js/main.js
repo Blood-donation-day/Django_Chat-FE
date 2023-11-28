@@ -81,8 +81,8 @@ function getMyFood() {
 
         displayFood(data);
       } else if (response.status === 401) {
-        await RefreshAccessToken();
-        await getFood(currentpage);
+        const refreshTokeb = await RefreshAccessToken();
+        return getFood(currentpage);
       } else if (response.status === 404) {
         // 마지막 페이지인 경우
         currentpage -= 1;
@@ -178,8 +178,8 @@ function getMyFood() {
         console.log(data);
         loadDetail(data);
       } else if (response.status === 401) {
-        await RefreshAccessToken();
-        await getFoodDetail(pk);
+        const refreshToken = await RefreshAccessToken();
+        return getFoodDetail(pk);
       }
     } catch (error) {
       console.error("에러 발생: ", error);
